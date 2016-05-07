@@ -1,4 +1,5 @@
 defmodule Exsolr.Indexer do
+  require Logger
   # curl -X POST -H 'Content-Type: application/json' 'http://localhost:8983/solr/my_collection/update/json/docs' --data-binary '
   # {
   #   "id": "1",
@@ -8,11 +9,10 @@ defmodule Exsolr.Indexer do
   def add(document) do
     case HTTPoison.post(json_docs_url, body(document), [{"Accept", "application/json"}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: response_body}} ->
-        IO.inspect(response_body)
+        Logger.debug response_body
         true
-      {_, %HTTPoison.Response{status_code: _, body: response_body}} ->
-        IO.puts 'crap'
-        IO.inspect(response_body)
+      {_, %HTTPoison.Error{id: _, reason: error_reason}} ->
+        Logger.error error_reason
         false
     end
   end
@@ -20,11 +20,10 @@ defmodule Exsolr.Indexer do
   def commit do
     case HTTPoison.get("#{url}?commit=true") do
       {:ok, %HTTPoison.Response{status_code: 200, body: response_body}} ->
-        IO.inspect(response_body)
+        Logger.debug response_body
         true
       {_, %HTTPoison.Error{id: _, reason: error_reason}} ->
-        IO.puts 'crap'
-        IO.inspect(error_reason)
+        Logger.error error_reason
         false
     end
   end
