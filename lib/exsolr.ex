@@ -18,4 +18,13 @@ defmodule Exsolr do
   def commit do
     Indexer.commit
   end
+
+  @doc """
+  Delete all the documents from the Solr index
+
+  https://wiki.apache.org/solr/FAQ#How_can_I_delete_all_documents_from_my_index.3F
+  """
+  def delete_all do
+    Indexed.delete_all
+  end
 end
