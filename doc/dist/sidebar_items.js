@@ -1,0 +1,1 @@
+sidebarNodes={"exceptions":[],"extras":[{"id":"api-reference","title":"API Reference","headers":[]}],"modules":[{"id":"Exsolr","title":"Exsolr","functions":[{"id":"add/1","anchor":"add/1"},{"id":"commit/0","anchor":"commit/0"}]},{"id":"Exsolr.Indexer","title":"Exsolr.Indexer","functions":[{"id":"add/1","anchor":"add/1"},{"id":"commit/0","anchor":"commit/0"}]}],"protocols":[]}
