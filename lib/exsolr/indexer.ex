@@ -1,6 +1,8 @@
 defmodule Exsolr.Indexer do
   require Logger
 
+  alias Exsolr.Config
+
   def add(document) do
     HTTPoison.post(json_docs_update_url, body(document), json_headers)
     |> handle_http_poison_response
@@ -46,8 +48,7 @@ defmodule Exsolr.Indexer do
   defp commit_xml_body, do: "<commit/>"
 
   defp json_docs_update_url, do: "#{update_url}/json/docs"
-  defp update_url, do: "http://localhost:8983/solr/#{solr_core}/update"
-  defp solr_core, do: "elixir_test"
+  defp update_url, do: "http://#{Config.hostname}:#{Config.port}/solr/#{Config.core}/update"
 
   defp body(document) do
     {:ok, body} = Poison.encode(document)

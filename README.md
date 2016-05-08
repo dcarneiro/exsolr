@@ -1,6 +1,6 @@
 # Exsolr
 
-Rude try to convert the index part of RSolr to Elixir
+Rude try to convert the indexing part of RSolr to Elixir
 
 ## Installation
 
@@ -16,6 +16,17 @@ Rude try to convert the index part of RSolr to Elixir
           [applications: [:exsolr]]
         end
 
+## Configuration
+
+The default behaviour is to configure using the config file:
+
+In `config/config.exs`, add:
+
+        config :exsolr,
+          hostname: "localhost",
+          port: 8983,
+          core: "elixir_test"
+
 ## Indexing documents into Solr
 
 Single document via #add
@@ -26,3 +37,13 @@ Multiple documents via #add
 
         [%{id: 1, price: 1.00}, %{id: 2, price: 10.50}]
         |> Exsolr.add
+
+Force a commit into Solr
+
+        Exsolr.commit
+
+## Deleting
+
+Delete all the documents from the core
+
+        Exsolr.delete_all
