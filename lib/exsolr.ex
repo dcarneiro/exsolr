@@ -20,6 +20,13 @@ defmodule Exsolr do
   end
 
   @doc """
+  Delete the document with id `id` from the solr index
+  """
+  def delete_by_id(id) do
+    Indexer.delete_by_id(id)
+  end
+
+  @doc """
   Delete all the documents from the Solr index
 
   https://wiki.apache.org/solr/FAQ#How_can_I_delete_all_documents_from_my_index.3F

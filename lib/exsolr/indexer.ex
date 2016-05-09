@@ -9,6 +9,23 @@ defmodule Exsolr.Indexer do
   end
 
   @doc """
+  Delete the document with id `id` from the solr index
+
+  From the Solr docs:
+
+  The JSON update format allows for a simple delete-by-id. The value of a delete
+  can be an array which contains a list of zero or more specific document id's
+  (not a range) to be deleted. For example, a single document:
+
+    { "delete": { "id": "myid" } }
+
+  https://cwiki.apache.org/confluence/display/solr/Uploading+Data+with+Index+Handlers#UploadingDatawithIndexHandlers-JSONFormattedIndexUpdates
+  """
+  def delete_by_id(id) do
+    update_request(json_headers, delete_by_id_json_body(id))
+  end
+
+  @doc """
   Function to delete all documents from the Solr Index
   """
   def delete_all do
@@ -42,8 +59,25 @@ defmodule Exsolr.Indexer do
     end
   end
 
-  defp json_headers, do: [{"Accept", "application/json"}]
+  defp json_headers, do: [{"Content-Type", "application/json"}]
   defp xml_headers, do: [{"Content-type", "text/xml; charset=utf-8"}]
+
+  @doc """
+  Builds the delete_by_id request body
+
+  ## Examples
+
+      iex> Exsolr.Indexer.delete_by_id_json_body(42)
+      ~s({"delete":{"id":"42"}})
+
+  """
+  def delete_by_id_json_body(id) do
+    {:ok, body} = %{ delete: %{ id: Integer.to_string(id) }}
+                  |> Poison.encode
+
+    body
+  end
+
   defp delete_all_xml_body, do: "<delete><query>*:*</query></delete>"
   defp commit_xml_body, do: "<commit/>"
 

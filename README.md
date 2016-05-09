@@ -44,6 +44,10 @@ Force a commit into Solr
 
 ## Deleting
 
+Delete by id
+
+        Exsolr.delete_by_id("1")
+
 Delete all the documents from the core
 
         Exsolr.delete_all
