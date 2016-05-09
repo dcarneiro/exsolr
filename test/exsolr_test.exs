@@ -7,7 +7,7 @@ defmodule ExsolrTest do
     Exsolr.add(document)
   end
 
-  test "add a document" do
+  test "delete a document by id" do
     Exsolr.delete_by_id(3)
   end
 

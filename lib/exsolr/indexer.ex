@@ -67,12 +67,19 @@ defmodule Exsolr.Indexer do
 
   ## Examples
 
-      iex> Exsolr.Indexer.delete_by_id_json_body(42)
+      iex> Exsolr.Indexer.delete_by_id_json_body(27)
+      ~s({"delete":{"id":"27"}})
+
+      iex> Exsolr.Indexer.delete_by_id_json_body("42")
       ~s({"delete":{"id":"42"}})
 
   """
+  def delete_by_id_json_body(id) when is_integer(id)  do
+    Integer.to_string(id)
+    |> delete_by_id_json_body
+  end
   def delete_by_id_json_body(id) do
-    {:ok, body} = %{ delete: %{ id: Integer.to_string(id) }}
+    {:ok, body} = %{ delete: %{ id: id }}
                   |> Poison.encode
 
     body
