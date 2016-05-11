@@ -1,6 +1,6 @@
 # Exsolr
 
-Rude try to convert the indexing part of RSolr to Elixir
+Port of [RSolr](https://github.com/rsolr/rsolr) to Elixir
 
 ## Installation
 
@@ -26,6 +26,19 @@ In `config/config.exs`, add:
           hostname: "localhost",
           port: 8983,
           core: "elixir_test"
+
+## Querying
+
+** Not Implemented Yet **
+
+Use #get to perform a query into Solr. All parameters are optional, known parameters (for now) are: `q`, `fq`, `start` and `rows`.
+
+        Exsolr.get(
+          q: "roses",
+          fq: ["blue", "violet"],
+          start: 0,
+          rows: 10
+        )
 
 ## Indexing documents into Solr
 
