@@ -1,10 +1,15 @@
 defmodule Exsolr.Indexer do
+  @moduledoc """
+  Provides functions that write documents to Solr
+  """
+
   require Logger
 
   alias Exsolr.Config
 
   def add(document) do
-    HTTPoison.post(json_docs_update_url, body(document), json_headers)
+    json_docs_update_url
+    |> HTTPoison.post(encode(document), json_headers)
     |> handle_http_poison_response
   end
 
@@ -27,6 +32,8 @@ defmodule Exsolr.Indexer do
 
   @doc """
   Function to delete all documents from the Solr Index
+
+  https://wiki.apache.org/solr/FAQ#How_can_I_delete_all_documents_from_my_index.3F
   """
   def delete_all do
     update_request(xml_headers, delete_all_xml_body)
@@ -41,7 +48,8 @@ defmodule Exsolr.Indexer do
   end
 
   defp update_request(headers, body) do
-    HTTPoison.post(update_url, body, headers)
+    update_url
+    |> HTTPoison.post(body, headers)
     |> handle_http_poison_response
   end
 
@@ -75,11 +83,12 @@ defmodule Exsolr.Indexer do
 
   """
   def delete_by_id_json_body(id) when is_integer(id)  do
-    Integer.to_string(id)
+    id
+    |> Integer.to_string()
     |> delete_by_id_json_body
   end
   def delete_by_id_json_body(id) do
-    {:ok, body} = %{ delete: %{ id: id }}
+    {:ok, body} = %{delete: %{id: id}}
                   |> Poison.encode
 
     body
@@ -91,7 +100,7 @@ defmodule Exsolr.Indexer do
   defp json_docs_update_url, do: "#{update_url}/json/docs"
   defp update_url, do: "http://#{Config.hostname}:#{Config.port}/solr/#{Config.core}/update"
 
-  defp body(document) do
+  defp encode(document) do
     {:ok, body} = Poison.encode(document)
     body
   end

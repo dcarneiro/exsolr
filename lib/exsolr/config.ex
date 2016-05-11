@@ -1,4 +1,8 @@
 defmodule Exsolr.Config do
+  @moduledoc """
+  Access the Exsolr configurations
+  """
+
   def hostname do
     Application.get_env(:exsolr, :hostname)
   end
