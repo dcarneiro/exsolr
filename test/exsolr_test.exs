@@ -1,6 +1,10 @@
 defmodule ExsolrTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest Exsolr
+
+  test "get a document" do
+    Exsolr.get(q: "roses")
+  end
 
   test "add a document" do
     document = %{id: "3", title: "Doc 3" }

@@ -48,7 +48,7 @@ defmodule Exsolr.Indexer do
   end
 
   defp update_request(headers, body) do
-    update_url
+    Config.update_url
     |> HTTPoison.post(body, headers)
     |> handle_http_poison_response
   end
@@ -97,8 +97,7 @@ defmodule Exsolr.Indexer do
   defp delete_all_xml_body, do: "<delete><query>*:*</query></delete>"
   defp commit_xml_body, do: "<commit/>"
 
-  defp json_docs_update_url, do: "#{update_url}/json/docs"
-  defp update_url, do: "http://#{Config.hostname}:#{Config.port}/solr/#{Config.core}/update"
+  defp json_docs_update_url, do: "#{Config.update_url}/json/docs"
 
   defp encode(document) do
     {:ok, body} = Poison.encode(document)

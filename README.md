@@ -29,7 +29,7 @@ In `config/config.exs`, add:
 
 ## Querying
 
-** Not Implemented Yet **
+__Not Implemented Yet__
 
 Use #get to perform a query into Solr. All parameters are optional, known parameters (for now) are: `q`, `fq`, `start` and `rows`.
 

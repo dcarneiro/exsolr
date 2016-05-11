@@ -4,6 +4,14 @@ defmodule Exsolr do
   """
 
   alias Exsolr.Indexer
+  alias Exsolr.Searcher
+
+  @doc """
+  Send a search request to Solr
+  """
+  def get(query_params) do
+    Searcher.get(query_params)
+  end
 
   @doc """
   Adds the `document` to Solr.
