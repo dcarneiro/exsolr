@@ -22,46 +22,46 @@ The default behaviour is to configure using the config file:
 
 In `config/config.exs`, add:
 
-    config :exsolr,
-      hostname: "localhost",
-      port: 8983,
-      core: "elixir_test"
+        config :exsolr,
+          hostname: "localhost",
+          port: 8983,
+          core: "elixir_test"
 
 ## Querying
 
 Use #get to perform a query into Solr. All parameters are optional
 
-    response = Exsolr.get(q: "roses", fq: ["blue", "violet"])
-    Enum.map(response["docs"], fn(doc) -> doc["id"] end)
+        response = Exsolr.get(q: "roses", fq: ["blue", "violet"])
+        Enum.map(response["docs"], fn(doc) -> doc["id"] end)
 
 The following query fields will have default values if they aren't specified
 
-    q:     "*:*"
-    wt:    "json"
-    start: 0
-    rows:  10
+        q:     "*:*"
+        wt:    "json"
+        start: 0
+        rows:  10
 
 ## Indexing documents into Solr
 
 Single document via #add
 
-    Exsolr.add(%{id: 1, price: 1.00})
+        Exsolr.add(%{id: 1, price: 1.00})
 
 Multiple documents via #add
 
-    [%{id: 1, price: 1.00}, %{id: 2, price: 10.50}]
-    |> Exsolr.add
+        [%{id: 1, price: 1.00}, %{id: 2, price: 10.50}]
+        |> Exsolr.add
 
 Force a commit into Solr
 
-    Exsolr.commit
+        Exsolr.commit
 
 ## Deleting
 
 Delete by id
 
-    Exsolr.delete_by_id("1")
+        Exsolr.delete_by_id("1")
 
 Delete all the documents from the core
 
-    Exsolr.delete_all
+        Exsolr.delete_all
