@@ -3,14 +3,13 @@ defmodule Exsolr.Indexer do
   Provides functions that write documents to Solr
   """
 
-  require Logger
-
   alias Exsolr.Config
+  alias Exsolr.HttpResponse
 
   def add(document) do
     json_docs_update_url
     |> HTTPoison.post(encode(document), json_headers)
-    |> handle_http_poison_response
+    |> HttpResponse.body
   end
 
   @doc """
@@ -50,21 +49,7 @@ defmodule Exsolr.Indexer do
   defp update_request(headers, body) do
     Config.update_url
     |> HTTPoison.post(body, headers)
-    |> handle_http_poison_response
-  end
-
-  defp handle_http_poison_response({status, response}) do
-    case {status, response} do
-      {:ok, %HTTPoison.Response{status_code: 200, body: response_body}} ->
-        Logger.debug response_body
-        true
-      {:ok, %HTTPoison.Response{status_code: status_code, body: response_body}} ->
-        Logger.warn "status_code: #{status_code} - #{response_body}"
-        false
-      {_, %HTTPoison.Error{id: _, reason: error_reason}} ->
-        Logger.error error_reason
-        false
-    end
+    |> HttpResponse.body
   end
 
   defp json_headers, do: [{"Content-Type", "application/json"}]
