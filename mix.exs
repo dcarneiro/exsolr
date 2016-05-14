@@ -7,7 +7,25 @@ defmodule Exsolr.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description,
+     package: package,
      deps: deps]
+  end
+
+  defp description do
+    """
+    Thin Wrapper around Solr api.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README.md"],
+      maintainers: ["Daniel Carneiro"],
+      licenses: ["MIT License (MIT)"],
+      links: %{"GitHub" => "https://github.com/dcarneiro/exsolr",
+              "Docs" => "http://hexdocs.pm/exsolr/"}
+    ]
   end
 
   # Configuration for the OTP application
