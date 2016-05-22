@@ -12,8 +12,8 @@ defmodule Exsolr do
 
   ## Examples
 
-    iex> Exsolr.info
-    %{hostname: "localhost", port: 8983, core: "elixir_test"}
+      iex> Exsolr.info
+      %{hostname: "localhost", port: 8983, core: "elixir_test"}
   """
   def info do
     Config.info
