@@ -3,17 +3,25 @@ defmodule Exsolr.Config do
   Access the Exsolr configurations
   """
 
-  def hostname do
-    Application.get_env(:exsolr, :hostname)
+  @doc """
+  Returns a map containing the solr connection info
+
+  ## Examples
+
+    iex> Exsolr.info
+    %{hostname: "localhost", port: 8983, core: "elixir_test"}
+  """
+  def info do
+    %{
+      hostname: hostname,
+      port: port,
+      core: core
+    }
   end
 
-  def port do
-    Application.get_env(:exsolr, :port)
-  end
-
-  def core do
-    Application.get_env(:exsolr, :core)
-  end
+  def hostname, do: Application.get_env(:exsolr, :hostname)
+  def port, do: Application.get_env(:exsolr, :port)
+  def core, do: Application.get_env(:exsolr, :core)
 
   @doc """
   Returns the base url to do `select` queries to solr

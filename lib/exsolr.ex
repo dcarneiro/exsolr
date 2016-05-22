@@ -3,8 +3,21 @@ defmodule Exsolr do
   Solr wrapper made in Elixir.
   """
 
+  alias Exsolr.Config
   alias Exsolr.Indexer
   alias Exsolr.Searcher
+
+  @doc """
+  Returns a map containing the solr connection info
+
+  ## Examples
+
+    iex> Exsolr.info
+    %{hostname: "localhost", port: 8983, core: "elixir_test"}
+  """
+  def info do
+    Config.info
+  end
 
   @doc """
   Send a search request to Solr
