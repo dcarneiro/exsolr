@@ -84,7 +84,7 @@ defmodule Exsolr.Searcher do
 
   defp build_solr_url(solr_query) do
     url = Config.select_url <> solr_query
-    Logger.debug url
+    _ = Logger.debug url
     url
   end
 
