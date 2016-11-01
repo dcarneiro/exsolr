@@ -74,7 +74,6 @@ defmodule Exsolr.Searcher do
     "q=#{URI.encode_www_form(value)}"
   end
   defp build_solr_query_parameter(key, value) do
-    IO.inspect [key, value]
     [Atom.to_string(key), value]
     |> Enum.join("=")
   end
