@@ -23,7 +23,8 @@ config :logger, level: :info
 config :exsolr,
   hostname: "localhost",
   port: 8983,
-  core: "elixir_test"
+  core: "localhost_core"
+  # core: "elixir_test"
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
