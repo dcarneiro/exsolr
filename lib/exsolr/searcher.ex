@@ -72,8 +72,6 @@ defmodule Exsolr.Searcher do
   end
   defp build_solr_query_parameter(:q, value) do
     "q=#{URI.encode_www_form(value)}"
-    # ["q", ]
-    # |> Enum.join("=")
   end
   defp build_solr_query_parameter(key, value) do
     IO.inspect [key, value]
