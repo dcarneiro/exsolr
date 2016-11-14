@@ -92,7 +92,15 @@ defmodule Exsolr.Searcher do
   end
 
   defp extract_response(solr_response) do
-    {:ok, %{"response" => response}} = solr_response |> Poison.decode
-    response
+    case solr_response |> Poison.decode do
+      {:ok, %{"response" => response, "moreLikeThis" => moreLikeThis}} -> Map.put(response, "mlt", extract_mlt_result(moreLikeThis))
+      {:ok, %{"response" => response}} -> response
+    end
+  end
+
+  defp extract_mlt_result(mlt) do 
+    result =
+    for k <- Map.keys(mlt), do: get_in(mlt, [k, "docs"])
+    result |> List.flatten
   end
 end
