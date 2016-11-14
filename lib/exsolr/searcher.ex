@@ -92,7 +92,9 @@ defmodule Exsolr.Searcher do
   end
 
   defp extract_response(solr_response) do
-    {:ok, %{"response" => response}} = solr_response |> Poison.decode
-    response
+    case solr_response |> Poison.decode do
+      {:ok, %{"response" => response, "moreLikeThis" => moreLikeThis}} -> Map.put(response, "mlt", moreLikeThis)
+      {:ok, %{"response" => response}} -> response
+    end
   end
 end
