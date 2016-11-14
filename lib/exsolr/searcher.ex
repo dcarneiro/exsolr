@@ -98,8 +98,9 @@ defmodule Exsolr.Searcher do
     end
   end
 
-  defp extract_mlt_result(mlt) do    
+  defp extract_mlt_result(mlt) do 
+    result =
     for k <- Map.keys(mlt), do: get_in(mlt, [k, "docs"])
-    |> List.flatten
+    result |> List.flatten
   end
 end
