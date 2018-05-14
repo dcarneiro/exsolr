@@ -5,7 +5,7 @@ defmodule Exsolr.Mixfile do
     [
       app: :exsolr,
       version: "0.0.1",
-      elixir: "~> 1.2",
+      elixir: "~> 1.4",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       description: description,
