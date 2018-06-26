@@ -25,7 +25,7 @@ defmodule Exsolr.Mixfile do
       files: ["lib", "mix.exs", "README.md"],
       maintainers: ["Daniel Carneiro"],
       licenses: ["MIT License (MIT)"],
-      links: %{"GitHub" => "https://github.com/dcarneiro/exsolr",
+      links: %{"GitHub" => "https://github.com/OIT-ADS-Web/exsolr",
               "Docs" => "http://hexdocs.pm/exsolr/"}
     ]
   end
