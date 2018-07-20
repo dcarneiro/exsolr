@@ -31,6 +31,17 @@ config :exsolr,
   core: "elixir_test"
 ```
 
+You can also add the scheme if you are using `https` for example:
+
+```elixir
+config :exsolr,
+  hostname: "localhost",
+  port: 443,
+  core: "elixir_test",
+  scheme: "https"
+```
+
+
 ## Querying
 
 Use #get to perform a query into Solr. All parameters are optional
