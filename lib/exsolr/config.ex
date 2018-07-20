@@ -13,15 +13,17 @@ defmodule Exsolr.Config do
   """
   def info do
     %{
-      hostname: hostname,
-      port: port,
-      core: core
+      hostname: hostname(),
+      port: port(),
+      core: core(),
+      scheme: scheme()
     }
   end
 
   def hostname, do: Application.get_env(:exsolr, :hostname)
   def port, do: Application.get_env(:exsolr, :port)
   def core, do: Application.get_env(:exsolr, :core)
+  def scheme, do: Application.get_env(:exsolr, :scheme, "http")
 
   @doc """
   Returns the base url to do `select` queries to solr
@@ -32,7 +34,7 @@ defmodule Exsolr.Config do
       "http://localhost:8983/solr/elixir_test/select"
 
   """
-  def select_url, do: "#{base_url}/select"
+  def select_url, do: "#{base_url()}/select"
 
   @doc """
   Returns the base url to do `update` queries to solr
@@ -42,8 +44,8 @@ defmodule Exsolr.Config do
       iex> Exsolr.Config.update_url
       "http://localhost:8983/solr/elixir_test/update"
   """
-  def update_url, do: "#{base_url}/update"
+  def update_url, do: "#{base_url()}/update"
 
-  defp base_url, do: "http://#{hostname}:#{port}/solr/#{core}"
+  defp base_url, do: "#{scheme()}://#{hostname()}:#{port()}/solr/#{core()}"
 end
 

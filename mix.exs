@@ -4,13 +4,13 @@ defmodule Exsolr.Mixfile do
   def project do
     [
       app: :exsolr,
-      version: "0.0.1",
-      elixir: "~> 1.2",
+      version: "0.0.2",
+      elixir: "~> 1.6",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      description: description,
-      package: package,
-      deps: deps,
+      description: description(),
+      package: package(),
+      deps: deps(),
     ]
   end
 
@@ -25,7 +25,7 @@ defmodule Exsolr.Mixfile do
       files: ["lib", "mix.exs", "README.md"],
       maintainers: ["Daniel Carneiro"],
       licenses: ["MIT License (MIT)"],
-      links: %{"GitHub" => "https://github.com/dcarneiro/exsolr",
+      links: %{"GitHub" => "https://github.com/OIT-ADS-Web/exsolr",
               "Docs" => "http://hexdocs.pm/exsolr/"}
     ]
   end
@@ -48,8 +48,8 @@ defmodule Exsolr.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:httpoison, "~> 0.8.0"},
-      {:poison, "~> 2.0"},
+      {:httpoison, "~> 1.0"},
+      {:poison, "~> 3.1"},
       {:credo, "~> 0.3", only: [:dev, :test]},
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev},
